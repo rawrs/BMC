@@ -1,4 +1,4 @@
-package bmc.main.level;
+package bmc.game.level;
 
 public class Block {
 

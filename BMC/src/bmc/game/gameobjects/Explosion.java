@@ -1,4 +1,4 @@
-package bmc.main.gameobjects;
+package bmc.game.gameobjects;
 
 public class Explosion extends GameObject {
 
