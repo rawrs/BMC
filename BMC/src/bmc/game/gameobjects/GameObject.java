@@ -4,7 +4,7 @@ import bmc.game.SpriteLocations;
 import android.graphics.Canvas;
 import android.graphics.Rect;
 import android.graphics.RectF;
-
+//game objects
 abstract public class GameObject{
     protected Rect mDestination = new Rect();
     protected RectF mRect = new RectF();

@@ -8,7 +8,7 @@ import bmc.game.gameobjects.GameObject;
 import bmc.game.gameobjects.Player;
 import bmc.game.gameobjects.Sprite;
 import bmc.game.level.Level;
-
+//physics class
 public class Physics {
 	private Level mLevel;
 	private List<GameObject> gameObjects = new ArrayList<GameObject>();

@@ -2,7 +2,7 @@ package bmc.game.gameobjects;
 
 import android.graphics.Canvas;
 import bmc.game.PlayerState;
-
+//player class
 public class Player extends GameObject{
 	public Player(Sprite[] sprites)
 	{

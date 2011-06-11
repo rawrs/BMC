@@ -14,7 +14,7 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
 
-
+//panel class
 public class Panel extends SurfaceView implements SurfaceHolder.Callback{
 	
 	private ViewThread mThread;
