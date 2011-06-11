@@ -9,41 +9,41 @@ import android.graphics.Rect;
 import bmc.game.R;
 
 public class Sprite {
-    private int mSpeed;
+    private double mSpeed;
     private double mIndex;
     private int mHeight,mWidth;
     private int numIndexes,currentIndex;
-    private Rect mSource;
-    private Rect mDestination;
+    private Rect mSource =  new Rect();
+    private Rect mDestination = new Rect();
  
     private Bitmap mBitmap;
     
-    public Sprite(Resources res, int height, int width,int speed,int X,int Y)
+    public Sprite(Bitmap res, int height, int width,double speed,int X,int Y)
     {
     	this(res,height,width,speed);
     	mDestination.left = X;
     	mDestination.top = Y;
-    	mDestination.bottom = Y-height;
+    	mDestination.bottom = Y+height;
     	mDestination.right = X+width;
     }
  
-    public Sprite(Resources res, int height, int width,int speed) 
+    public Sprite(Bitmap res, int height, int width,double speed) 
     {
-        mBitmap = BitmapFactory.decodeResource(res, R.drawable.icon);
+        mBitmap = res;
         mIndex = 0;
         currentIndex = 0;
-        setSourceRect();
         numIndexes = (int) Math.floor(mBitmap.getWidth()/width);
         mSpeed = speed;
         mHeight = height;
         mWidth = width;
+        setSourceRect();
     }
  
     public void animate(long elapsedTime) {
         //mX += mSpeedX * (elapsedTime / 20f);
         //mY += mSpeedY * (elapsedTime / 20f);
     	mIndex += mSpeed;
-    	if(mIndex > numIndexes)
+    	if(mIndex >= numIndexes)
     		mIndex = 0;
     	if(Math.floor(mIndex) != currentIndex)
     	{
@@ -59,6 +59,7 @@ public class Sprite {
     	mSource.right = mWidth*(currentIndex+1);
     }
     public void doDraw(Canvas canvas) {
+        //canvas.drawBitmap(mBitmap, new Rect(0,0,50,50), new Rect(10,10,50,50), null);
         canvas.drawBitmap(mBitmap, mSource, mDestination, null);
     }
     public void addX(int X)
@@ -69,7 +70,7 @@ public class Sprite {
     public void addY(int Y)
     {
     	mDestination.top = mDestination.top+Y;
-    	mDestination.bottom = mDestination.top-mHeight;
+    	mDestination.bottom = mDestination.top+mHeight;
     }
 
 	public int getmX() {
@@ -88,11 +89,11 @@ public class Sprite {
 		this.mDestination.top = mY;
 	}
 
-	public int getmSpeed() {
+	public double getmSpeed() {
 		return mSpeed;
 	}
 
-	public void setmSpeed(int mSpeed) {
+	public void setmSpeed(double mSpeed) {
 		this.mSpeed = mSpeed;
 	}
 

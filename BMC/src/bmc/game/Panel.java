@@ -3,7 +3,9 @@ package bmc.game;
 import java.util.ArrayList;
 
 import bmc.game.R;
+import bmc.game.gameobjects.Sprite;
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -22,37 +24,36 @@ public class Panel extends SurfaceView implements SurfaceHolder.Callback{
 	public static float mHeight;
 	private int mElementNumber = 0;
 	private Paint mPaint = new Paint();
+	private ArrayList<Sprite> mSprites = new ArrayList<Sprite>();
 	 
 	public Panel(Context context) {
 	    super(context);
-	    //mBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.icon);
+	    Bitmap mBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.run);
 	    getHolder().addCallback(this);
 	    mThread = new ViewThread(this);
 	    mPaint.setColor(Color.WHITE);
+	    Sprite sprite =new Sprite( mBitmap,46, 42,1,100,100); 
+	    mSprites.add(sprite);
 	}
  
 	public void doDraw(long elapsed,Canvas canvas) {
 		canvas.drawColor(Color.BLACK);
-	    synchronized (mElements) {
-	        for (Element element : mElements) {
-	            element.doDraw(canvas);
+	    synchronized (mSprites) {
+	        for (Sprite sprite : mSprites) {
+	        	sprite.doDraw(canvas);
 	        }
 	    }
-	    canvas.drawText("FPS: " + Math.round(1000f / elapsed) + " Elements: " + mElementNumber, 10, 10, mPaint);
+	    canvas.drawText("FPS: " + Math.round(1000f / elapsed) + " Sprite: " + mSprites.size(), 10, 10, mPaint);
 	}
 	@Override
 	public boolean onTouchEvent(MotionEvent event) {
 
-		synchronized (mElements) {
-	        mElements.add(new Element(getResources(), (int) event.getX(), (int) event.getY()));
-	        mElementNumber = mElements.size();
-	    }
 	    return super.onTouchEvent(event);
 	}
 	public void animate(long elapsedTime) {
-	    synchronized (mElements) {
-	        for (Element element : mElements) {
-	            element.animate(elapsedTime);
+	    synchronized (mSprites) {
+	        for (Sprite Sprite : mSprites) {
+	        	Sprite.animate(elapsedTime);
 	        }
 	    }
 	}
