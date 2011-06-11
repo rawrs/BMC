@@ -14,6 +14,8 @@ public class Physics {
 	private List<GameObject> gameObjects = new ArrayList<GameObject>();
 	private Player mPlayer;
 	private Sprite[] mSprites;
+	private float gameSpeed = 1;
+	private float fall = .5f,jump = -3f;
 	public Physics(Sprite[] sprites)
 	{
 		mSprites = sprites;
@@ -23,12 +25,22 @@ public class Physics {
 	}
 	public void logic()
 	{
+		//if(level.onGround(mPlayer.getDestination){
+		//else
+        for (GameObject gameObject : gameObjects) {
+        	gameObject.addVelocityY(fall);
+        }
+        mPlayer.addVelocityY(fall);
 		
+	}
+	public void jump()
+	{
+		mPlayer.addVelocityY(jump);
 	}
 	public void animate(long elapsedTime) {
 		// TODO Auto-generated method stub
-		logic();
 	    synchronized (gameObjects) {
+	    	logic();
 	        for (GameObject gameObject : gameObjects) {
 	        	gameObject.animate(elapsedTime);
 	        }

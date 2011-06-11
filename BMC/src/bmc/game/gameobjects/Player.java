@@ -1,8 +1,5 @@
 package bmc.game.gameobjects;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import android.graphics.Canvas;
 import bmc.game.PlayerState;
 
@@ -17,19 +14,21 @@ public class Player extends GameObject{
 	public void animate(long elapsedTime) {
 		// TODO Auto-generated method stub
 		//mSprites[mPlayerState.getmState()].animate(elapsedTime);
-		mSprites[0].animate(elapsedTime);
+		this.addX(mVelocityX);
+		this.addY(mVelocityY);
+		mSprites[PlayerState.Start.getmState()].animate(elapsedTime);
 	}
 	@Override
 	public void doDraw(Canvas canvas) {
 		// TODO Auto-generated method stub
 		//mSprites.get(mPlayerState.getmState()).doDraw(canvas,mDestination);
-		mSprites[0].doDraw(canvas,mDestination);
+		mSprites[PlayerState.Start.getmState()].doDraw(canvas,mDestination);
 	}
 	@Override
 	public void move(int X, int Y) {
 		// TODO Auto-generated method stub
-		addX(X);
-		addY(Y);
+		this.addX(X);
+		this.addY(Y);
 		
 	}
 	public PlayerState getmPlayerState() {
@@ -39,7 +38,7 @@ public class Player extends GameObject{
 	{
 		if(this.mPlayerState != mPlayerState)
 		{
-			
+			//TODO add stuff for changing animation 
 		}
 		this.mPlayerState = mPlayerState;
 	}

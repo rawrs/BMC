@@ -1,6 +1,5 @@
 package bmc.game;
 
-import java.util.ArrayList;
 
 import bmc.game.R;
 import bmc.game.gameobjects.Sprite;
@@ -42,29 +41,35 @@ public class Panel extends SurfaceView implements SurfaceHolder.Callback{
 	    Sprite sprite =new Sprite( mBitmap,46, 42,1); 
 	    mSprites[SpriteLocations.Player.getLocation()] = sprite;
 	}
-	public void doDraw(long elapsed,Canvas canvas) {
+	public void doDraw(long elapsed,Canvas canvas) 
+	{
 		canvas.drawColor(Color.BLACK);
 	    mPhysics.doDraw(canvas);
 	    canvas.drawText("FPS: " + Math.round(1000f / elapsed), 10, 10, mPaint);
 	}
 	@Override
-	public boolean onTouchEvent(MotionEvent event) {
+	public boolean onTouchEvent(MotionEvent event) 
+	{
 
 	    return super.onTouchEvent(event);
 	}
-	public void animate(long elapsedTime) {
+	public void animate(long elapsedTime) 
+	{
 	    mPhysics.animate(elapsedTime);
 	}
 	@Override
-	public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
+	public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) 
+	{
 		// TODO Auto-generated method stub
 	    mWidth = width;
 	    mHeight = height;
 	}
 
 	@Override
-	public void surfaceCreated(SurfaceHolder holder) {
-		if (!mThread.isAlive()) {
+	public void surfaceCreated(SurfaceHolder holder) 
+	{
+		if (!mThread.isAlive()) 
+		{
 	        mThread = new ViewThread(this);
 	        mThread.setRunning(true);
 	        mThread.start();
@@ -73,7 +78,8 @@ public class Panel extends SurfaceView implements SurfaceHolder.Callback{
 	}
 
 	@Override
-	public void surfaceDestroyed(SurfaceHolder holder) {
+	public void surfaceDestroyed(SurfaceHolder holder) 
+	{
 		if (mThread.isAlive()) {
 	        mThread.setRunning(false);
 	    }
