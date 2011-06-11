@@ -1,6 +1,8 @@
-package bmc.main;
+package bmc.game;
 
 import java.util.Random;
+
+import bmc.game.R;
 
 import android.content.res.Resources;
 import android.graphics.Bitmap;

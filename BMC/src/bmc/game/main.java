@@ -1,4 +1,4 @@
-package bmc.main;
+package bmc.game;
 
 import android.app.Activity;
 import android.os.Bundle;

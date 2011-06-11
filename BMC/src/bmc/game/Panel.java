@@ -1,8 +1,8 @@
-package bmc.main;
+package bmc.game;
 
 import java.util.ArrayList;
 
-import bmc.main.R;
+import bmc.game.R;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
