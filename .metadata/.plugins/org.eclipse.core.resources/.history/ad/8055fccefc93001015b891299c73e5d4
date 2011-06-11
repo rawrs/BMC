@@ -1,0 +1,7 @@
+package bmc.game.gameobjects;
+
+public class Sprite {
+	public Sprite()
+	{
+	}
+}

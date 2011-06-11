@@ -1,0 +1,7 @@
+package bmc.game.gameobjects;
+
+public class Player extends Sprite {
+	public Player()
+	{
+	}
+}

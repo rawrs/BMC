@@ -1,6 +1,6 @@
 package bmc.game.gameobjects;
 
-public class Player extends Sprite {
+public class Player{
 	public Player()
 	{
 	}
