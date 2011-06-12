@@ -1,5 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <game>
+    <level>
+        <path>
+            <name>Path1</name>
+            <distance>5000</distance>
+            <isvertical>false</isvertical>
+            <block>
+                <width>5000</width>
+                <height>200</height>
+                <xpos>0</xpos>
+                <ypos>400</ypos>
+            </block>
+            <start>
+                <xpos>100</xpos>
+                <ypos>300</ypos>
+            </start>
+        </path>
+    </level>
 	<level>
 	    <path>
 	        <name>Path1</name>

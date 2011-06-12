@@ -27,12 +27,13 @@ public class Physics {
 	{
 		mSprites = sprites;
 		mPlayer = new Player(sprites);
-		mPlayer.setX(100);
-		mPlayer.setY(300);
 
 		level.LoadLevels();
 		mLevel = level.getLevel(0);
 		mLevelManager = level;
+		
+		mPlayer.setX(mLevel.getStartX());
+        mPlayer.setY(mLevel.getStartY());
 		
 		gameObjects.add(new Laser(sprites, 200, 200, 300, 400));
 	}

@@ -254,4 +254,34 @@ public class Level {
 	public void setmSprites(Sprite[] mSprites) {
 		this.mSprites = mSprites;
 	}
+
+    public Path getPathWithStartPoint()
+    {
+        return pathWithStartPoint;
+    }
+
+    public void setPathWithStartPoint(Path pathWithStartPoint)
+    {
+        this.pathWithStartPoint = pathWithStartPoint;
+    }
+
+    public int getStartX()
+    {
+        return startX;
+    }
+
+    public void setStartX(int startX)
+    {
+        this.startX = startX;
+    }
+
+    public int getStartY()
+    {
+        return startY;
+    }
+
+    public void setStartY(int startY)
+    {
+        this.startY = startY;
+    }
 }
