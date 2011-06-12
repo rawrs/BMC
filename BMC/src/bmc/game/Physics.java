@@ -18,7 +18,6 @@ public class Physics {
 	private float gameSpeed = 1;
 	private float fall = 1f,jump = -200f,run = 3f,stop = -1f;
 	
-	private boolean delete = false;
 	public Physics(Sprite[] sprites)
 	{
 		mSprites = sprites;
