@@ -14,17 +14,17 @@ public class Laser extends GameObject {
 		if( x2 - x1 < 0 )
 			angle += Math.PI;
 		rotation = (float)(angle * 180 / Math.PI);
-		setX(x1);
-		setY(y1);
+		setX(x1 - mWidth/2f);
+		setY(y1 - mHeight/2f);
 		mVelocityX = (float)Math.cos(angle) * speed;
 		mVelocityY = (float)Math.sin(angle) * speed;
 	}
 
-	@Override
 	public void doDraw(Canvas canvas)
 	{
 		mSprites[index].doDraw(canvas, mDestination, rotation);
 	}
+	
 	@Override
 	public void addVelocityX(double vel)
 	{

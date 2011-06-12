@@ -23,8 +23,8 @@ public class LaserGun extends GameObject {
 		if( playerX - x < 0 )
 			angle += Math.PI;
 		rotation = (float)(angle * 180 / Math.PI);
-		setX(x);
-		setY(y);
+		setX(x - mWidth/2f);
+		setY(y - mHeight/2f);
 		this.player = player;
 		this.gameObjects = gameObjects;
 		this.sprites = sprites;
@@ -32,14 +32,6 @@ public class LaserGun extends GameObject {
 	
 	public void doDraw(Canvas canvas)
 	{
-		float x = getX();
-		float y = getY();
-		float playerX = player.getDestination().centerX();
-		float playerY = player.getDestination().centerY();
-		double angle = Math.atan( (playerY-y) / (playerX-x) );
-		if( playerX - x < 0 )
-			angle += Math.PI;
-		rotation = (float)(angle * 180 / Math.PI);
 		mSprites[index].doDraw(canvas, mDestination, rotation);
 	}
 	
@@ -50,10 +42,18 @@ public class LaserGun extends GameObject {
 		{
 			synchronized (gameObjects)
 			{
-				gameObjects.add(new Laser(sprites, getX(), getY(), player.getDestination().centerX(), player.getDestination().centerY()));
+				gameObjects.add(new Laser(sprites, getDestination().centerX(), getDestination().centerY(), player.getDestination().centerX(), player.getDestination().centerY()));
 				lastShot = 0;
 			}
 		}
+		float x = getX();
+		float y = getY();
+		float playerX = player.getDestination().centerX();
+		float playerY = player.getDestination().centerY();
+		double angle = Math.atan( (playerY-y) / (playerX-x) );
+		if( playerX - x < 0 )
+			angle += Math.PI;
+		rotation = (float)(angle * 180 / Math.PI);
 		mSprites[index].animate(elapsedTime);
 	}
 
