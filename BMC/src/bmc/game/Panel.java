@@ -61,6 +61,10 @@ public class Panel extends SurfaceView implements SurfaceHolder.Callback{
 	    mBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.laser);
 	    sprite =new Sprite( mBitmap,5, 40,1); 
 	    mSprites[SpriteLocations.Laser.getLocation()] = sprite;
+	    
+	    mBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.ground);
+	    sprite =new Sprite( mBitmap,5, 40,1); 
+	    mSprites[SpriteLocations.ground.getLocation()] = sprite;
 	}
 	public void doDraw(long elapsed,Canvas canvas) 
 	{

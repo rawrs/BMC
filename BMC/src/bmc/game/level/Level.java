@@ -15,8 +15,8 @@ public class Level {
     protected ArrayList<Entrance>     entrances;
     protected ArrayList<Block>		  blocksOnScreen;
     protected Sprite[] 				  mSprites;
-    protected RectF 				  mRect;
-    protected Rect					  mDestination;
+    protected RectF 				  mRect = new RectF();
+    protected Rect					  mDestination = new Rect();
 	protected int 				      mWidth;
 	protected int                     mHeight;
     protected boolean				  initialized=false;
@@ -36,6 +36,7 @@ public class Level {
     {
         paths = new ArrayList<Path>();
         entrances = new ArrayList<Entrance>();
+        blocksOnScreen = new ArrayList<Block>();
         
     }
     
