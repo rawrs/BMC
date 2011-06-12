@@ -43,11 +43,11 @@ public class Panel extends SurfaceView implements SurfaceHolder.Callback{
 	    
 	    Bitmap mBitmapPlayerFall = BitmapFactory.decodeResource(getResources(), R.drawable.fall);
 	    Sprite playerFall =new Sprite( mBitmapPlayerFall,45, 40,1); 
-	    mSprites[SpriteLocations.PlayerJump.getLocation()] = playerFall;
+	    mSprites[SpriteLocations.PlayerFall.getLocation()] = playerFall;
 	    
 	    Bitmap mBitmapPlayerJump = BitmapFactory.decodeResource(getResources(), R.drawable.jumps);
 	    Sprite playerJump =new Sprite( mBitmapPlayerJump,59, 38,1); 
-	    mSprites[SpriteLocations.PlayerFall.getLocation()] = playerJump;
+	    mSprites[SpriteLocations.PlayerJump.getLocation()] = playerJump;
 	    
 	    mBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.debris);
 	    sprite =new Sprite( mBitmap,40, 40,1); 
