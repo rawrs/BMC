@@ -87,11 +87,19 @@ public class Physics {
 	}
 	public void animate(long elapsedTime) {
 		// TODO Auto-generated method stub
+
 	    synchronized (gameObjects) {
 	    	logic();
 	        for (GameObject gameObject : gameObjects) {
 	        	gameObject.animate(elapsedTime);
 	        }
+
+	        synchronized (gameObjectsAdd) {
+		    	for (GameObject gameObject : gameObjectsAdd) {
+		        	gameObjects.add(gameObject);
+		        }
+	        }
+	    	gameObjectsAdd.clear();
 	    }
 	    mLevel.animate(elapsedTime, 0, 0);
 		mPlayer.animate(elapsedTime);
@@ -103,12 +111,6 @@ public class Physics {
 	    synchronized (gameObjects) {
 	        for (GameObject gameObject : gameObjects) {
 	        	gameObject. doDraw(canvas);
-	        }
-                synchronized (gameObjectsAdd) {
-	        	for (GameObject gameObject : gameObjectsAdd) {
-		        	gameObjects.add(gameObject);
-		        }
-	        	gameObjectsAdd.clear();
 	        }
 	    }
 	    mPlayer.doDraw(canvas);
