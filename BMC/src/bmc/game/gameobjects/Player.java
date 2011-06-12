@@ -4,7 +4,7 @@ import android.graphics.Canvas;
 import bmc.game.PlayerState;
 //player class
 public class Player extends GameObject{
-	private float velocityJump = 0; 
+	private boolean startJump = false;
 	public Player(Sprite[] sprites)
 	{
 		super(sprites);
@@ -16,13 +16,32 @@ public class Player extends GameObject{
 		// TODO Auto-generated method stub
 		//mSprites[mPlayerState.getmState()].animate(elapsedTime);
 		this.addX(mVelocityX);
-		this.addY(mVelocityY+velocityJump);
+		this.addY(mVelocityY);
 		if(mVelocityY < 0)
-			mPlayerState = PlayerState.Jumping;
+		{
+			PlayerState last = mPlayerState;
+			if(!startJump)
+				mPlayerState = PlayerState.Jumping;
+			else if(mPlayerState == last)
+			{
+				if(mSprites[mPlayerState.getmState()].getIndex() == 0)
+				{
+					if(startJump)
+						mPlayerState = PlayerState.Falling;
+				}
+				else
+				{
+					startJump = true;
+				}
+			}
+		}
 		else if (mVelocityX != 0)
 			mPlayerState = PlayerState.Running;
 		else 
+		{
+			startJump = false;
 			mPlayerState = PlayerState.Falling;
+		}
 		mSprites[mPlayerState.getmState()].animate(elapsedTime);
 	}
 	@Override
@@ -48,12 +67,6 @@ public class Player extends GameObject{
 			//TODO add stuff for changing animation 
 		}
 		this.mPlayerState = mPlayerState;
-	}
-	public float getVelocityJump() {
-		return velocityJump;
-	}
-	public void setVelocityJump(float velocityJump) {
-		this.velocityJump = velocityJump;
 	}
 	
 	

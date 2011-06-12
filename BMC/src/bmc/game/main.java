@@ -8,6 +8,8 @@ public class main extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 	    super.onCreate(savedInstanceState);
 	    requestWindowFeature(Window.FEATURE_NO_TITLE);
+	    //setRequestedOrientation(savedInstanceState..SCREEN_ORIENTATION_PORTRAIT);
+        
 	    setContentView(new Panel(this));
 	}
 }

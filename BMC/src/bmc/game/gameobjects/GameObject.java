@@ -16,7 +16,7 @@ abstract public class GameObject{
 	protected float mVelocityX;
 	protected float maxVelocityX = 2,minVelocityX = -2;
 	protected float mVelocityY;
-	protected float maxVelocityY = 2,minVelocityY = -2;
+	protected float maxVelocityY = 2,minVelocityY = -20;
 	protected int index = 0;
 	
 	public GameObject(Sprite[] sprites)
@@ -63,6 +63,10 @@ abstract public class GameObject{
     {
     	return mVelocityX;
     }
+    public void setVelocityX(float vel)
+    {
+    	mVelocityX = vel;
+    }
     public void addVelocityY(double vel)
     {
     	mVelocityY += vel;
@@ -70,6 +74,10 @@ abstract public class GameObject{
     		mVelocityY = minVelocityY;
     	if(mVelocityY > maxVelocityY)
     		mVelocityY = maxVelocityY;
+    }
+    public void setVelocityY(float vel)
+    {
+    	mVelocityY = vel;
     }
     public double getVelocityY()
     {
@@ -113,6 +121,12 @@ abstract public class GameObject{
 	}
 	public void setDestination(Rect mDestination) {
 		this.mDestination = mDestination;
+	}
+	public RectF getmRect() {
+		return mRect;
+	}
+	public void setmRect(RectF mRect) {
+		this.mRect = mRect;
 	}
 	
 }
