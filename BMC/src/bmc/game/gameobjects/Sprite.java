@@ -3,6 +3,7 @@ package bmc.game.gameobjects;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Matrix;
 import android.graphics.Rect;
 
 public class Sprite {
@@ -47,6 +48,14 @@ public class Sprite {
     public void doDraw(Canvas canvas,Rect destination) 
     {
         canvas.drawBitmap(mBitmap, mSource, destination, null);
+    }
+    
+    public void doDraw(Canvas canvas, Rect destination, float degrees)
+    {
+    	Matrix rotate = new Matrix();
+    	rotate.postRotate(degrees);
+    	rotate.postTranslate((destination.left + destination.right) / 2f, (destination.top + destination.bottom) / 2f);
+    	canvas.drawBitmap(mBitmap, rotate, null);
     }
 
 	public double getSpeed() {

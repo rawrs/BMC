@@ -5,6 +5,7 @@ import java.util.List;
 
 import android.graphics.Canvas;
 import bmc.game.gameobjects.GameObject;
+import bmc.game.gameobjects.Laser;
 import bmc.game.gameobjects.Player;
 import bmc.game.gameobjects.Sprite;
 import bmc.game.level.Level;
@@ -24,6 +25,8 @@ public class Physics {
 		mPlayer = new Player(sprites);
 		mPlayer.setX(100);
 		mPlayer.setY(100);
+		
+		gameObjects.add(new Laser(sprites, 200, 200, 300, 400));
 	}
 	public void logic()
 	{

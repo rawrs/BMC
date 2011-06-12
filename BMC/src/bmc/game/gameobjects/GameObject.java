@@ -1,5 +1,6 @@
 package bmc.game.gameobjects;
 
+import bmc.game.PlayerState;
 import bmc.game.SpriteLocations;
 import android.graphics.Canvas;
 import android.graphics.Rect;
@@ -16,25 +17,39 @@ abstract public class GameObject{
 	protected float maxVelocityX = 2,minVelocityX = -2;
 	protected float mVelocityY;
 	protected float maxVelocityY = 2,minVelocityY = -2;
-	
+	protected int index = 0;
 	
 	public GameObject(Sprite[] sprites)
 	{
 		mSprites = sprites;
-		Sprite current = sprites[SpriteLocations.PlayerFall.getLocation()];
+		Sprite current = sprites[0];
 		mHeight = (current.getHeight());
 		mWidth = (current.getWidth());
 	}
-	public GameObject(Sprite[] sprites,int location)
+	public GameObject(Sprite[] sprites, int location)
 	{
 		mSprites = sprites;
+		index = location;
 		Sprite current = sprites[location];
 		mHeight = (current.getHeight());
 		mWidth = (current.getWidth());
 	}
-	abstract public void animate(long elapsedTime);
-    abstract public void doDraw(Canvas canvas);
-    abstract public void move(int X,int Y);
+	public void animate(long elapsedTime)
+	{
+		this.addX(mVelocityX);
+		this.addY(mVelocityY);
+		mSprites[index].animate(elapsedTime);
+	}
+	public void doDraw(Canvas canvas)
+	{
+		mSprites[index].doDraw(canvas,mDestination);
+	}
+	
+	public void move(int X, int Y)
+	{
+		this.addX(X);
+		this.addY(Y);
+	}
     
     public void addVelocityX(double vel)
     {
