@@ -105,31 +105,31 @@ public class Level {
             for (Block b : blocks)
             {
                 // Bounds for top and bottom
-                if ((rect.left >= b.getXpos() || rect.right <= b.getXpos() + b.getWidth()))
+                if ((rect.left >= b.getXpos() && rect.left <= b.getXpos()+b.getWidth()) || (rect.right <= b.getXpos() + b.getWidth())&& rect.right <= b.getXpos())
                 {
                     // Top check
-                    if (rect.top < b.getYpos() + b.getHeight())
+                    if (rect.top <= b.getYpos() + b.getHeight() && rect.top >= b.getYpos())
                     {
                         top = true;
                     }
                     
-                    if (rect.bottom > b.getYpos())
+                    if (rect.bottom >= b.getYpos() && rect.bottom <= b. getYpos() + b.getHeight())
                     {
                         bottom = true;
                     }
                 }
                 
                 // Bounds for left and right
-                if ((rect.top >= b.getYpos() || rect.bottom <= b.getYpos() + b.getHeight()))
+                if ((rect.top >= b.getYpos()&& rect.top <= b.getYpos()+b.getHeight()) || (rect.bottom <= b.getYpos() + b.getHeight() && rect.bottom >= b.getYpos()))
                 {
                     // Left check
-                    if (rect.left <= b.getXpos() + b.getWidth())
+                    if (rect.left >= b.getXpos() && rect.left <= b.getXpos()+b.getWidth())
                     {
                         left = true;
                     }
                     
                     // Right check
-                    if (rect.right >= b.getXpos())
+                    if (rect.right <= b.getXpos()+ b.getWidth() && rect.right >= b.getXpos())
                     {
                         right = true;
                     }
