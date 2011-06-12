@@ -111,11 +111,62 @@ public class LevelManager {
                                 boolean isVertical = false;
                                 ArrayList<Block> blocks = new ArrayList<Block>();
                                 ArrayList<GameObject> objects = new ArrayList<GameObject>();
+                                boolean hasStartPoint = false;
+                                int startX = 0, startY = 0;
                                 
                                 // Look for items in the path tag until we find the end tag for it.
                                 while (event != XmlPullParser.END_TAG || !parser.getName().contentEquals("path"))
                                 {
-                                    if (parser.getName().contentEquals("distance"))
+                                    if (parser.getName().contentEquals("start"))
+                                    {
+                                        parser.next();
+                                        event = parser.getEventType();
+                                        
+                                        hasStartPoint = true;
+                                        
+                                        // Now we have to look for the x and y position
+                                        while (event != XmlPullParser.END_TAG || !parser.getName().contentEquals("start"))
+                                        {
+                                            if (parser.getName().contentEquals("xpos"))
+                                            {
+                                                parser.next();
+                                                event = parser.getEventType();
+                                                
+                                                startX = Integer.parseInt(parser.getText());
+                                                
+                                                parser.next();
+                                                event = parser.getEventType();
+                                                
+                                                if (!parser.getName().contentEquals("xpos") || event != XmlPullParser.END_TAG)
+                                                {
+                                                    Log.e("LevelManager.LoadLevels", "Error: malformed xpos tag for " +
+                                                            "start point. Exiting!");
+                                                    return -1;
+                                                }
+                                            }
+                                            else if (parser.getName().contentEquals("ypos"))
+                                            {
+                                                parser.next();
+                                                event = parser.getEventType();
+                                                
+                                                startY = Integer.parseInt(parser.getText());
+                                                
+                                                parser.next();
+                                                event = parser.getEventType();
+                                                
+                                                if (!parser.getName().contentEquals("ypos") || event != XmlPullParser.END_TAG)
+                                                {
+                                                    Log.e("LevelManager.LoadLevels", "Error: malformed ypos tag for " +
+                                                            "start point. Exiting!");
+                                                    return -1;
+                                                }
+                                            }
+                                            
+                                            parser.next();
+                                            event = parser.getEventType();
+                                        }
+                                    }
+                                    else if (parser.getName().contentEquals("distance"))
                                     {
                                         parser.next();
                                         event = parser.getEventType();
@@ -393,6 +444,12 @@ public class LevelManager {
                                     newPath.AddBlock(b);
                                 }
                                 
+                                // Set start stuff
+                                newPath.setHasStartPoint(hasStartPoint);
+                                newPath.setStartX(startX);
+                                newPath.setStartY(startY);
+                                
+                                // Add the path
                                 paths.add(newPath);
                                 
                                 // Next line...

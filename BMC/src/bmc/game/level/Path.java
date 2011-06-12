@@ -10,6 +10,8 @@ public class Path {
     private boolean                 isVertical;
     private ArrayList<Block>        blocks;
     private ArrayList<GameObject>   objects;
+    private boolean                 hasStartPoint;
+    private int                     startX, startY;
     
     public Path(String name,
                  int distance,
@@ -62,5 +64,35 @@ public class Path {
 
     public ArrayList<GameObject> getObjects() {
         return objects;
+    }
+
+    public boolean isHasStartPoint()
+    {
+        return hasStartPoint;
+    }
+
+    public void setHasStartPoint(boolean hasStartPoint)
+    {
+        this.hasStartPoint = hasStartPoint;
+    }
+
+    public int getStartX()
+    {
+        return startX;
+    }
+
+    public void setStartX(int startX)
+    {
+        this.startX = startX;
+    }
+
+    public int getStartY()
+    {
+        return startY;
+    }
+
+    public void setStartY(int startY)
+    {
+        this.startY = startY;
     }
 }
