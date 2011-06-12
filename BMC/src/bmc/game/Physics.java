@@ -15,7 +15,9 @@ public class Physics {
 	private Player mPlayer;
 	private Sprite[] mSprites;
 	private float gameSpeed = 1;
-	private float fall = .5f,jump = -3f;
+	private float fall = 1f,jump = -200f,run = 3f,stop = -1f;
+	
+	private boolean delete = false;
 	public Physics(Sprite[] sprites)
 	{
 		mSprites = sprites;
@@ -30,7 +32,7 @@ public class Physics {
         for (GameObject gameObject : gameObjects) {
         	gameObject.addVelocityY(fall);
         }
-        mPlayer.addVelocityY(fall);
+		mPlayer.addVelocityY(fall);
 		
 	}
 	public void jump()

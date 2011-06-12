@@ -38,8 +38,16 @@ public class Panel extends SurfaceView implements SurfaceHolder.Callback{
 	public void getSprites()
 	{
 		Bitmap mBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.run);
-	    Sprite sprite =new Sprite( mBitmap,46, 42,1); 
-	    mSprites[SpriteLocations.Player.getLocation()] = sprite;
+	    Sprite sprite =new Sprite( mBitmap,47, 40,1); 
+	    mSprites[SpriteLocations.PlayerRun.getLocation()] = sprite;
+	    
+	    Bitmap mBitmapPlayerFall = BitmapFactory.decodeResource(getResources(), R.drawable.fall);
+	    Sprite playerFall =new Sprite( mBitmapPlayerFall,45, 40,1); 
+	    mSprites[SpriteLocations.PlayerJump.getLocation()] = playerFall;
+	    
+	    Bitmap mBitmapPlayerJump = BitmapFactory.decodeResource(getResources(), R.drawable.jumps);
+	    Sprite playerJump =new Sprite( mBitmapPlayerJump,59, 38,1); 
+	    mSprites[SpriteLocations.PlayerFall.getLocation()] = playerJump;
 	}
 	public void doDraw(long elapsed,Canvas canvas) 
 	{
@@ -50,7 +58,7 @@ public class Panel extends SurfaceView implements SurfaceHolder.Callback{
 	@Override
 	public boolean onTouchEvent(MotionEvent event) 
 	{
-
+		mPhysics.jump();
 	    return super.onTouchEvent(event);
 	}
 	public void animate(long elapsedTime) 

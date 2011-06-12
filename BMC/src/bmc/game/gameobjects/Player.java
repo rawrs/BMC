@@ -4,25 +4,32 @@ import android.graphics.Canvas;
 import bmc.game.PlayerState;
 //player class
 public class Player extends GameObject{
+	private float velocityJump = 0; 
 	public Player(Sprite[] sprites)
 	{
 		super(sprites);
 		// TODO Auto-generated constructor stub
 	}
-	private PlayerState mPlayerState = PlayerState.Start;
+	private PlayerState mPlayerState = PlayerState.Falling;
 	@Override
 	public void animate(long elapsedTime) {
 		// TODO Auto-generated method stub
 		//mSprites[mPlayerState.getmState()].animate(elapsedTime);
 		this.addX(mVelocityX);
-		this.addY(mVelocityY);
-		mSprites[PlayerState.Start.getmState()].animate(elapsedTime);
+		this.addY(mVelocityY+velocityJump);
+		if(mVelocityY < 0)
+			mPlayerState = PlayerState.Jumping;
+		else if (mVelocityX != 0)
+			mPlayerState = PlayerState.Running;
+		else 
+			mPlayerState = PlayerState.Falling;
+		mSprites[mPlayerState.getmState()].animate(elapsedTime);
 	}
 	@Override
 	public void doDraw(Canvas canvas) {
 		// TODO Auto-generated method stub
 		//mSprites.get(mPlayerState.getmState()).doDraw(canvas,mDestination);
-		mSprites[PlayerState.Start.getmState()].doDraw(canvas,mDestination);
+		mSprites[mPlayerState.getmState()].doDraw(canvas,mDestination);
 	}
 	@Override
 	public void move(int X, int Y) {
@@ -42,5 +49,12 @@ public class Player extends GameObject{
 		}
 		this.mPlayerState = mPlayerState;
 	}
+	public float getVelocityJump() {
+		return velocityJump;
+	}
+	public void setVelocityJump(float velocityJump) {
+		this.velocityJump = velocityJump;
+	}
+	
 	
 }

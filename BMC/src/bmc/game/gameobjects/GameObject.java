@@ -16,10 +16,12 @@ abstract public class GameObject{
 	protected float maxVelocityX = 2,minVelocityX = -2;
 	protected float mVelocityY;
 	protected float maxVelocityY = 2,minVelocityY = -2;
+	
+	
 	public GameObject(Sprite[] sprites)
 	{
 		mSprites = sprites;
-		Sprite current = sprites[SpriteLocations.Player.getLocation()];
+		Sprite current = sprites[SpriteLocations.PlayerFall.getLocation()];
 		mHeight = (current.getHeight());
 		mWidth = (current.getWidth());
 	}
@@ -42,7 +44,7 @@ abstract public class GameObject{
     	if(mVelocityX > maxVelocityX)
     		mVelocityX = maxVelocityX;
     }
-    public double getVelocity()
+    public double getVelocityX()
     {
     	return mVelocityX;
     }

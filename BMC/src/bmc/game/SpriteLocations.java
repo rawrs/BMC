@@ -2,7 +2,7 @@ package bmc.game;
 
 public enum SpriteLocations 
 {
-	Player(0);
+	PlayerRun(0),PlayerJump(1),PlayerFall(2);
 	private int mLocation;
 	SpriteLocations(int location)
 	{
