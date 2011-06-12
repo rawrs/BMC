@@ -11,8 +11,8 @@ public class Missile extends GameObject {
 	public Missile(Sprite[] sprites, float x, float y, Player player)
 	{
 		super(sprites, SpriteLocations.Missile.getLocation());
-		float playerX = player.getDestination().centerX();
-		float playerY = player.getDestination().centerY();
+		float playerX = player.getRect().centerX();
+		float playerY = player.getRect().centerY();
 		double angle = Math.atan( (playerY-y) / (playerX-x) );
 		if( playerX - x < 0 )
 			angle += Math.PI;
@@ -26,10 +26,10 @@ public class Missile extends GameObject {
 	
 	public void animate(long elapsedTime)
 	{
-		float x = getDestination().centerX();
-		float y = getDestination().centerY();
-		float playerX = player.getDestination().centerX();
-		float playerY = player.getDestination().centerY();
+		float x = getRect().centerX();
+		float y = getRect().centerY();
+		float playerX = player.getRect().centerX();
+		float playerY = player.getRect().centerY();
 		double angle = Math.atan( (playerY-y) / (playerX-x) );
 		if( playerX - x < 0 )
 			angle += Math.PI;

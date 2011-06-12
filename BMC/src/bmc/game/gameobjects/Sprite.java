@@ -55,8 +55,8 @@ public class Sprite {
     public void doDraw(Canvas canvas, Rect destination, float degrees)
     {
     	Matrix rotate = new Matrix();
-    	rotate.postRotate(degrees);
-    	rotate.postTranslate(destination.centerX(), destination.centerY());
+    	rotate.postRotate(degrees, mWidth/2f, mHeight/2f);
+    	rotate.postTranslate(destination.left, destination.right);
     	canvas.drawBitmap(mSubBitmap, rotate, null);
     }
 
