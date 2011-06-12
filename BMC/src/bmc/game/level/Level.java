@@ -86,7 +86,6 @@ public class Level {
             else if (right) { state = CollisionStates.TOPANDRIGHT; }
             else { state = CollisionStates.TOP; }
         }
-        
         else if (bottom)
         {
             if (left) { state = CollisionStates.BOTTOMANDLEFT; }
