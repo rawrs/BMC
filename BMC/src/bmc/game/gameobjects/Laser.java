@@ -7,7 +7,7 @@ public class Laser extends GameObject {
 	final float speed = 3;
 	float rotation;
 	
-	public Laser(Sprite[] sprites, int x1, int y1, int x2, int y2)
+	public Laser(Sprite[] sprites, float x1, float y1, float x2, float y2)
 	{
 		super(sprites, SpriteLocations.Laser.getLocation());
 		double angle = Math.atan( (y2-y1) / (x2-x1) );
