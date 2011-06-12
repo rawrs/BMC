@@ -14,6 +14,7 @@ public class Sprite {
     private Rect mSource =  new Rect();
  
     private Bitmap mBitmap;
+    private Bitmap mSubBitmap;
      
     public Sprite(Bitmap res, int height, int width,double speed) 
     {
@@ -44,6 +45,7 @@ public class Sprite {
     	mSource.top = 0;
     	mSource.bottom = mHeight;
     	mSource.right = mWidth*(currentIndex+1);
+    	mSubBitmap = Bitmap.createBitmap(mBitmap, mSource.left, mSource.top, mWidth, mHeight);
     }
     public void doDraw(Canvas canvas,Rect destination) 
     {
@@ -53,9 +55,9 @@ public class Sprite {
     public void doDraw(Canvas canvas, Rect destination, float degrees)
     {
     	Matrix rotate = new Matrix();
-    	rotate.postRotate(degrees);
-    	rotate.postTranslate(destination.centerX(), destination.centerY());
-    	canvas.drawBitmap(mBitmap, rotate, null);
+    	rotate.postRotate(degrees, mWidth/2f, mHeight/2f);
+    	rotate.postTranslate(destination.left, destination.right);
+    	canvas.drawBitmap(mSubBitmap, rotate, null);
     }
 
 	public double getSpeed() {
