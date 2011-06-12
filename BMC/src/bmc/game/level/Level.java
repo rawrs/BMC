@@ -56,7 +56,6 @@ public class Level {
                     {
                         top = true;
                     }
-                    
                     if (rect.bottom > b.getYpos())
                     {
                         bottom = true;
