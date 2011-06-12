@@ -1,5 +1,5 @@
 package bmc.game.level;
-
+    
 public class Block {
     private int width;
     private int height;

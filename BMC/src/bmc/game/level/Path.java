@@ -3,7 +3,7 @@ package bmc.game.level;
 import java.util.ArrayList;
 
 import bmc.game.gameobjects.GameObject;
-
+    
 public class Path {
     private String                  name;
     private int                     distance;

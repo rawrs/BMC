@@ -513,7 +513,6 @@ public class LevelManager {
                     levels.add(newLevel);
                 }
                 
-                
                 // Otherwise, we can just move on. Nothing needs to happen, it's bad
                 // XML, and we can not load anything.
                 parser.next();

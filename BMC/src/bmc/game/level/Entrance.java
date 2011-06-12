@@ -1,5 +1,5 @@
 package bmc.game.level;
-
+    
 public class Entrance {
     private String  from;
     private String  to;
