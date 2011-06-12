@@ -71,7 +71,6 @@ public class Level {
                     {
                         left = true;
                     }
-                    
                     // Right check
                     if (rect.right >= b.getXpos())
                     {
