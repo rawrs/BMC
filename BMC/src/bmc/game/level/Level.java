@@ -2,12 +2,24 @@ package bmc.game.level;
     
 import java.util.ArrayList;
 
+import bmc.game.Panel;
+import bmc.game.gameobjects.GameObject;
+import bmc.game.gameobjects.Sprite;
+
+import android.graphics.Canvas;
+import android.graphics.Rect;
 import android.graphics.RectF;
 
 public class Level {
-    private ArrayList<Path>         paths;
-    private ArrayList<Entrance>     entrances;
-    
+	protected ArrayList<Path>         paths;
+    protected ArrayList<Entrance>     entrances;
+    protected ArrayList<Block>		  blocksOnScreen;
+    protected Sprite[] 				  mSprites;
+    protected RectF 				  mRect;
+    protected Rect					  mDestination;
+	protected int 				      mWidth;
+	protected int                     mHeight;
+    protected boolean				  initialized=false;
     public enum CollisionStates
     {
         NONE,
@@ -24,6 +36,7 @@ public class Level {
     {
         paths = new ArrayList<Path>();
         entrances = new ArrayList<Entrance>();
+        
     }
     
     public void AddPath (Path path)
@@ -35,6 +48,44 @@ public class Level {
     {
         entrances.add(entrance);
     }
+    
+
+	public void animate(long elapsedTime,float X, float Y) {
+		// TODO Auto-generated method stub
+		mWidth = (int) Panel.mWidth;
+		mHeight = (int) Panel.mHeight;
+		this.addX(X);
+		this.addY(Y);
+		if(X+Y != 0 || !initialized)
+		{
+			blocksOnScreen.clear();
+			//if we change the screen look through blocks to see which ones we need to draw
+			synchronized (paths) {
+		        for (Path path : paths) {
+		        	for (Block block : path.getBlocks())
+		        	{
+		        		if(block.shouldDraw(mDestination))
+		        		{
+		        			block.animate(elapsedTime);
+		        			blocksOnScreen.add(block);
+		        		}
+		        	}
+		        }
+		    }
+			initialized = true;
+		}
+	}
+
+	public void doDraw(Canvas canvas) {
+		// TODO Auto-generated method stub
+		synchronized (blocksOnScreen) 
+		{
+        	for (Block block : blocksOnScreen)
+        	{
+        		block.doDraw(canvas);
+        	}
+		}
+	}
     
     public CollisionStates IsCollidingWithLevel(RectF rect)
     {
@@ -103,4 +154,73 @@ public class Level {
         // If it didn't hit any of those, it's already set to NONE.
         return state;
     }
+
+    public void addX(float X)
+    {
+    	setX(mRect.left+X);
+    }
+    public void addY(float Y)
+    {
+    	setY(mRect.top+Y);
+    }
+
+	public float getX() {
+		return mRect.left;
+	}
+
+	public void setX(float mX) {
+		this.mRect.left = mX;
+		mRect.right = mRect.left+mWidth;
+		
+		this.mDestination.left = (int)mX;
+		mDestination.right = mDestination.left+mWidth;
+	}
+
+	public float getY() {
+		return mRect.top;
+	}
+
+	public void setY(float mY) {
+		this.mRect.top = mY;
+		mRect.bottom = mRect.top+mHeight;
+		
+		this.mDestination.top = (int)mY;
+		mDestination.bottom = mDestination.top+mHeight;
+	}
+    public Rect getDestination() {
+		return mDestination;
+	}
+	public void setDestination(Rect mDestination) {
+		this.mDestination = mDestination;
+	}
+	public RectF getRect() {
+		return mRect;
+	}
+	public void setRect(RectF mRect) {
+		this.mRect = mRect;
+	}
+
+	public int getmWidth() {
+		return mWidth;
+	}
+
+	public void setmWidth(int mWidth) {
+		this.mWidth = mWidth;
+	}
+
+	public int getmHeight() {
+		return mHeight;
+	}
+
+	public void setmHeight(int mHeight) {
+		this.mHeight = mHeight;
+	}
+
+	public Sprite[] getmSprites() {
+		return mSprites;
+	}
+
+	public void setmSprites(Sprite[] mSprites) {
+		this.mSprites = mSprites;
+	}
 }

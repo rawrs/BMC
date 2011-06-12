@@ -1,7 +1,5 @@
 package bmc.game.gameobjects;
 
-import bmc.game.PlayerState;
-import bmc.game.SpriteLocations;
 import android.graphics.Canvas;
 import android.graphics.Rect;
 import android.graphics.RectF;
@@ -122,10 +120,10 @@ abstract public class GameObject{
 	public void setDestination(Rect mDestination) {
 		this.mDestination = mDestination;
 	}
-	public RectF getmRect() {
+	public RectF getRect() {
 		return mRect;
 	}
-	public void setmRect(RectF mRect) {
+	public void setRect(RectF mRect) {
 		this.mRect = mRect;
 	}
 	

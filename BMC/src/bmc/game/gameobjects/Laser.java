@@ -19,17 +19,19 @@ public class Laser extends GameObject {
 		mVelocityX = (float)Math.cos(angle) * speed;
 		mVelocityY = (float)Math.sin(angle) * speed;
 	}
-	
+
+	@Override
 	public void doDraw(Canvas canvas)
 	{
 		mSprites[index].doDraw(canvas, mDestination, rotation);
 	}
-
+	@Override
 	public void addVelocityX(double vel)
 	{
 		return;
 	}
-	
+
+	@Override
 	public void addVelocityY(double vel)
 	{
 		return;

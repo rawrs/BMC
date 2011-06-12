@@ -10,7 +10,9 @@ import android.content.res.Resources;
 import android.content.res.XmlResourceParser;
 import android.util.Log;
 import bmc.game.R;
+import bmc.game.SpriteLocations;
 import bmc.game.gameobjects.GameObject;
+import bmc.game.gameobjects.Sprite;
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 // Class LevelManager
@@ -21,11 +23,17 @@ import bmc.game.gameobjects.GameObject;
 public class LevelManager {
     private ArrayList<Level> levels;
     private Resources resources;
+    private Sprite[] sprites;
     
-    public LevelManager(Resources res) 
+    public LevelManager(Resources res,Sprite[] sprite) 
     {
         resources = res;
         levels = new ArrayList<Level>();
+        sprites = sprite;
+    }
+    public Level getLevel(int id)
+    {
+    	return levels.get(id);
     }
     
     ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -364,7 +372,7 @@ public class LevelManager {
                                         }
                                         
                                         // Add the block to the array list
-                                        Block newBlock = new Block(width, height, xpos, ypos);
+                                        Block newBlock = new Block(width, height, xpos, ypos,sprites,SpriteLocations.ground.getLocation());
                                         blocks.add(newBlock);
                                     }
                                     else
@@ -527,6 +535,10 @@ public class LevelManager {
         catch (IOException ioe)
         {
             Log.e("LevelManager.LoadLevels", "IO exception reading levels XML file! Error: " + ioe.getMessage());
+        }
+        catch(Exception e)
+        {
+        	Log.e("LevelManager.LoadLevels",e.getMessage());
         }
         
         return 0;

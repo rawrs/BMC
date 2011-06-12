@@ -3,7 +3,9 @@ package bmc.game;
 
 import bmc.game.R;
 import bmc.game.gameobjects.Sprite;
+import bmc.game.level.LevelManager;
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -32,11 +34,14 @@ public class Panel extends SurfaceView implements SurfaceHolder.Callback{
 	    
 	    mPaint.setColor(Color.WHITE);
 	    getSprites();
-	    mPhysics = new Physics(mSprites);
+	    Resources res = getResources();
+	    LevelManager level = new LevelManager(getResources(),mSprites);
+	    mPhysics = new Physics(mSprites,level);
 	    
 	}
 	public void getSprites()
 	{
+		
 		Bitmap mBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.run);
 	    Sprite sprite =new Sprite( mBitmap,47, 40,1); 
 	    mSprites[SpriteLocations.PlayerRun.getLocation()] = sprite;

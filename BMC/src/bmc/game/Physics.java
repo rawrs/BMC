@@ -3,6 +3,7 @@ package bmc.game;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.content.res.Resources;
 import android.graphics.Canvas;
 import bmc.game.gameobjects.GameObject;
 import bmc.game.gameobjects.Laser;
@@ -10,23 +11,27 @@ import bmc.game.gameobjects.Player;
 import bmc.game.gameobjects.Sprite;
 import bmc.game.level.Level;
 import bmc.game.level.Level.CollisionStates;
+import bmc.game.level.LevelManager;
 //physics class
 public class Physics {
 	private Level mLevel;
+	private LevelManager mLevelManager;
 	private List<GameObject> gameObjects = new ArrayList<GameObject>();
 	private Player mPlayer;
 	private Sprite[] mSprites;
 	private float gameSpeed = 1;
 	private float fall = 1f,jump = -200f,run = 3f,stop = -1f;
 	
-	public Physics(Sprite[] sprites)
+	public Physics(Sprite[] sprites,LevelManager level)
 	{
 		mSprites = sprites;
 		mPlayer = new Player(sprites);
 		mPlayer.setX(100);
 		mPlayer.setY(100);
-		
-		mLevel = new Level();
+
+		level.LoadLevels();
+		mLevel = level.getLevel(0);
+		mLevelManager = level;
 		
 		gameObjects.add(new Laser(sprites, 200, 200, 300, 400));
 	}
@@ -41,7 +46,7 @@ public class Physics {
         }
 		mPlayer.addVelocityY(fall);
 		
-		CollisionStates collision = mLevel.IsCollidingWithLevel(mPlayer.getmRect());
+		CollisionStates collision = mLevel.IsCollidingWithLevel(mPlayer.getRect());
 		switch(collision)
 		{
 			case BOTTOMANDLEFT:
@@ -87,6 +92,7 @@ public class Physics {
 	        	gameObject.animate(elapsedTime);
 	        }
 	    }
+	    mLevel.animate(elapsedTime, 0, 0);
 		mPlayer.animate(elapsedTime);
 	}
 

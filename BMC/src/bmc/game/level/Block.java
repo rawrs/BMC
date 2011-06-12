@@ -1,51 +1,55 @@
 package bmc.game.level;
+
+import bmc.game.gameobjects.GameObject;
+import bmc.game.gameobjects.Sprite;
+import android.graphics.Rect;
     
-public class Block {
-    private int width;
-    private int height;
-    private int xpos;
-    private int ypos;
+public class Block extends GameObject{
     
     public Block(int width,
                  int height,
                  int xpos,
-                 int ypos) {
-        this.width = width;
-        this.height = height;
-        this.xpos = xpos;
-        this.ypos = ypos;
+                 int ypos,Sprite[] sprites, int location) {
+    	super( sprites, location);
+        this.mWidth = width;
+        this.mHeight = height;
+        setX(xpos);
+        setY(ypos);
+        
     }
+    public boolean shouldDraw(Rect rectangle)
+    {
+    	return mDestination.intersect(rectangle);
+    }
+	@Override
+	public void addVelocityX(double vel)
+	{
+		return;
+	}
 
+	@Override
+	public void addVelocityY(double vel)
+	{
+		return;
+	}
+    
+    
     public int getWidth() {
-        return width;
+        return mWidth;
     }
 
-    public void setWidth(int width) {
-        this.width = width;
-    }
 
     public int getHeight() {
-        return height;
+        return mHeight;
     }
 
-    public void setHeight(int height) {
-        this.height = height;
-    }
 
     public int getXpos() {
-        return xpos;
-    }
-
-    public void setXpos(int xpos) {
-        this.xpos = xpos;
+        return mDestination.left;
     }
 
     public int getYpos() {
-        return ypos;
-    }
-
-    public void setYpos(int ypos) {
-        this.ypos = ypos;
+        return mDestination.top;
     }
 
 }
