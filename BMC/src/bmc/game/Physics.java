@@ -28,7 +28,7 @@ public class Physics {
 		mSprites = sprites;
 		mPlayer = new Player(sprites);
 		mPlayer.setX(100);
-		mPlayer.setY(100);
+		mPlayer.setY(300);
 
 		level.LoadLevels();
 		mLevel = level.getLevel(0);
@@ -53,30 +53,31 @@ public class Physics {
 			case BOTTOMANDLEFT:
 			case BOTTOMANDRIGHT:
 			case BOTTOM:
-				if(mPlayer.getVelocityX() < 0)
-					mPlayer.setVelocityX(0);
+				if(mPlayer.getVelocityY() > 0)
+					mPlayer.setVelocityY(0);
 				break;
 			case TOPANDLEFT:
 			case TOPANDRIGHT:
 			case TOP:
+				if(mPlayer.getVelocityY() < 0)
+					mPlayer.setVelocityY(0);
+	        	break;
+			
+		}
+		switch(collision)
+		{
+			case TOPANDLEFT:
+			case BOTTOMANDLEFT:
+			case LEFT:
+				if(mPlayer.getVelocityX() < 0)
+					mPlayer.setVelocityX(0);
+				break;
+			case BOTTOMANDRIGHT:
+			case TOPANDRIGHT:
+			case RIGHT:
 				if(mPlayer.getVelocityX() > 0)
 					mPlayer.setVelocityX(0);
 	        	break;
-			
-		}switch(collision)
-		{
-		case TOPANDLEFT:
-		case BOTTOMANDLEFT:
-		case LEFT:
-			if(mPlayer.getVelocityY() < 0)
-				mPlayer.setVelocityY(0);
-			break;
-		case BOTTOMANDRIGHT:
-		case TOPANDRIGHT:
-		case RIGHT:
-			if(mPlayer.getVelocityY() > 0)
-				mPlayer.setVelocityY(0);
-        	break;
 		
 		}
 		
