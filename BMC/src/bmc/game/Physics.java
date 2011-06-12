@@ -20,7 +20,7 @@ public class Physics {
 	private List<GameObject> gameObjectsAdd = new ArrayList<GameObject>();
 	private Player mPlayer;
 	private Sprite[] mSprites;
-	private float gameSpeed = 1;
+	private float gameSpeed = 1f;
 	private float fall = 1f,jump = -200f,run = 3f,stop = -1f;
 	
 	public Physics(Sprite[] sprites,LevelManager level)
@@ -46,7 +46,7 @@ public class Physics {
         	gameObject.addVelocityY(fall);
         }
 		mPlayer.addVelocityY(fall);
-		
+		mLevel.addX(gameSpeed);
 		CollisionStates collision = mLevel.IsCollidingWithLevel(mPlayer.getRect());
 		switch(collision)
 		{
@@ -102,8 +102,11 @@ public class Physics {
 	        }
 	    	gameObjectsAdd.clear();
 	    }
-	    mLevel.animate(elapsedTime, 0, 0);
 		mPlayer.animate(elapsedTime);
+		//if(mPlayer.getmPlayerState().compareTo(PlayerState.Running)==0)
+			mLevel.animate(elapsedTime, gameSpeed, 0);
+		//mLevel.animate(elapsedTime, 0, 0);
+	    
 	}
 
 	public void doDraw(Canvas canvas) {

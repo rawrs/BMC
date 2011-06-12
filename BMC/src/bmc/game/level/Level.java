@@ -94,6 +94,8 @@ public class Level {
 			        		if(block.shouldDraw(mDestination))
 			        		{
 			        			block.animate(elapsedTime);
+			        			block.setX(block.getMapPostion().left-mDestination.left);
+			        			block.setY(block.getMapPostion().top-mDestination.top);
 			        			blocksOnScreen.add(block);
 			        		}
 			        	}

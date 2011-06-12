@@ -102,11 +102,26 @@ abstract public class GameObject{
 		this.mDestination.left = (int)mX;
 		mDestination.right = mDestination.left+mWidth;
 	}
+	public void setX(float mX,float width) {
+		this.mRect.left = mX;
+		mRect.right = mRect.left+width;
+		
+		this.mDestination.left = (int)mX;
+		mDestination.right = (int) (mDestination.left+width);
+	}
+
 
 	public float getY() {
 		return mRect.top;
 	}
 
+	public void setY(float mY,float height) {
+		this.mRect.top = mY;
+		mRect.bottom = mRect.top+height;
+		
+		this.mDestination.top = (int)mY;
+		mDestination.bottom = (int) (mDestination.top+height);
+	}
 	public void setY(float mY) {
 		this.mRect.top = mY;
 		mRect.bottom = mRect.top+mHeight;
