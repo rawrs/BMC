@@ -7,6 +7,7 @@ import android.graphics.RectF;
 abstract public class GameObject{
     protected Rect mDestination = new Rect();
     protected RectF mRect = new RectF();
+    protected Rect mapPosition = new Rect();
 
 	protected int mWidth;
 	protected int mHeight;
@@ -32,6 +33,10 @@ abstract public class GameObject{
 		mHeight = (current.getHeight());
 		mWidth = (current.getWidth());
 	}
+    public boolean shouldDraw(Rect rectangle)
+    {
+    	return Rect.intersects(mapPosition,rectangle);
+    }
 	public void animate(long elapsedTime)
 	{
 		this.addX(mVelocityX);
@@ -140,6 +145,10 @@ abstract public class GameObject{
 	}
 	public void setRect(RectF mRect) {
 		this.mRect = mRect;
+	}
+	public Rect getMapPostion() 
+	{
+		return mapPosition;
 	}
 	
 }

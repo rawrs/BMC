@@ -5,7 +5,6 @@ import bmc.game.gameobjects.Sprite;
 import android.graphics.Rect;
     
 public class Block extends GameObject{
-    private Rect mapPosition;
     public Block(int width,
                  int height,
                  int xpos,
@@ -17,10 +16,6 @@ public class Block extends GameObject{
         setY(ypos);
         mapPosition = new Rect(xpos,ypos,xpos+width,ypos+height); 
         
-    }
-    public boolean shouldDraw(Rect rectangle)
-    {
-    	return Rect.intersects(mapPosition,rectangle);
     }
 	@Override
 	public void addVelocityX(double vel)
@@ -44,7 +39,6 @@ public class Block extends GameObject{
         return mHeight;
     }
 
-
     public int getXpos() {
         return mDestination.left;
     }
@@ -52,9 +46,4 @@ public class Block extends GameObject{
     public int getYpos() {
         return mDestination.top;
     }
-	public Rect getMapPostion() 
-	{
-		return mapPosition;
-	}
-
 }

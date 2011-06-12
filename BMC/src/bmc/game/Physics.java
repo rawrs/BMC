@@ -37,12 +37,23 @@ public class Physics {
 		
 		gameObjects.add(new Laser(sprites, 200, 200, 300, 400));
 	}
+	public void reset()
+	{
+		mPlayer.setX(mLevel.getStartX());
+        mPlayer.setY(mLevel.getStartY());
+        //every level starts at 0,0
+        mLevel.setX(0);
+        mLevel.setY(0);
+	}
 	public void logic()
 	{
 		//if(level.onGround(mPlayer.getDestination){
 		//else
 		
-		
+		if(mPlayer.getRect().top > Panel.mHeight)
+		{
+			reset();
+		}
         for (GameObject gameObject : gameObjects) {
         	gameObject.addVelocityY(fall);
         }
