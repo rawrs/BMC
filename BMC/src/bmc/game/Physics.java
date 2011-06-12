@@ -17,6 +17,7 @@ public class Physics {
 	private Level mLevel;
 	private LevelManager mLevelManager;
 	private List<GameObject> gameObjects = new ArrayList<GameObject>();
+	private List<GameObject> gameObjectsAdd = new ArrayList<GameObject>();
 	private Player mPlayer;
 	private Sprite[] mSprites;
 	private float gameSpeed = 1;
@@ -98,10 +99,16 @@ public class Physics {
 
 	public void doDraw(Canvas canvas) {
 		// TODO Auto-generated method stub
-
+		mLevel.doDraw(canvas);
 	    synchronized (gameObjects) {
 	        for (GameObject gameObject : gameObjects) {
 	        	gameObject. doDraw(canvas);
+	        }
+                synchronized (gameObjectsAdd) {
+	        	for (GameObject gameObject : gameObjectsAdd) {
+		        	gameObjects.add(gameObject);
+		        }
+	        	gameObjectsAdd.clear();
 	        }
 	    }
 	    mPlayer.doDraw(canvas);

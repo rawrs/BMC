@@ -59,26 +59,30 @@ public class Level {
 		this.addY(Y);
 		if(X+Y != 0 || !initialized)
 		{
-			blocksOnScreen.clear();
-			//if we change the screen look through blocks to see which ones we need to draw
-			synchronized (paths) {
-		        for (Path path : paths) {
-		        	for (Block block : path.getBlocks())
-		        	{
-		        		if(block.shouldDraw(mDestination))
-		        		{
-		        			block.animate(elapsedTime);
-		        			blocksOnScreen.add(block);
-		        		}
-		        	}
-		        }
-		    }
-			initialized = true;
+			synchronized (blocksOnScreen) 
+			{
+				blocksOnScreen.clear();
+				//if we change the screen look through blocks to see which ones we need to draw
+				synchronized (paths) {
+			        for (Path path : paths) {
+			        	for (Block block : path.getBlocks())
+			        	{
+			        		if(block.shouldDraw(mDestination))
+			        		{
+			        			block.animate(elapsedTime);
+			        			blocksOnScreen.add(block);
+			        		}
+			        	}
+			        }
+			    }
+				initialized = true;
+			}
 		}
 	}
 
 	public void doDraw(Canvas canvas) {
 		// TODO Auto-generated method stub
+		
 		synchronized (blocksOnScreen) 
 		{
         	for (Block block : blocksOnScreen)
