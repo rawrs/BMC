@@ -20,6 +20,10 @@ public class Level {
 	protected int 				      mWidth;
 	protected int                     mHeight;
     protected boolean				  initialized=false;
+    protected Path                    pathWithStartPoint;
+    protected int                     startX = 0;
+    protected int                     startY = 0;
+    
     public enum CollisionStates
     {
         NONE,
@@ -40,9 +44,29 @@ public class Level {
         
     }
     
+    public void UpdateStartPoint()
+    {
+        // Search through the paths to find the start point.
+        // This will be called every time a path is added.
+        // If no start point exists, the start point will remain (0, 0).
+        // This code also assumes one start point, as it will check
+        // each path. The last path in the array to have a start point
+        // will give its start point data.
+        for (Path p : paths)
+        {
+            if (p.isHasStartPoint())
+            {
+                pathWithStartPoint = p;
+                startX = p.getStartX();
+                startY = p.getStartY();
+            }
+        }
+    }
+    
     public void AddPath (Path path)
     {
         paths.add(path);
+        UpdateStartPoint();
     }
     
     public void AddEntrance (Entrance entrance)
