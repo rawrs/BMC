@@ -35,12 +35,14 @@ public class Player extends GameObject{
 				}
 			}
 		}
-		else if (mVelocityX != 0)
-			mPlayerState = PlayerState.Running;
-		else 
+		else if (mVelocityY > 0)
 		{
 			startJump = false;
 			mPlayerState = PlayerState.Falling;
+		}
+		else 
+		{
+			mPlayerState = PlayerState.Running;
 		}
 		mSprites[mPlayerState.getmState()].animate(elapsedTime);
 	}

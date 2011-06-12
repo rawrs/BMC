@@ -20,19 +20,20 @@ public class Physics {
 	private List<GameObject> gameObjectsAdd = new ArrayList<GameObject>();
 	private Player mPlayer;
 	private Sprite[] mSprites;
-	private float gameSpeed = 1f;
-	private float fall = 1f,jump = -200f,run = 3f,stop = -1f;
+	private float gameSpeed = 3f;
+	private float fall = 1f,jump = -20f,run = 3f,stop = -1f;
 	
 	public Physics(Sprite[] sprites,LevelManager level)
 	{
 		mSprites = sprites;
 		mPlayer = new Player(sprites);
-		mPlayer.setX(100);
-		mPlayer.setY(300);
 
 		level.LoadLevels();
 		mLevel = level.getLevel(0);
 		mLevelManager = level;
+		
+		mPlayer.setX(mLevel.getStartX());
+        mPlayer.setY(mLevel.getStartY());
 		
 		gameObjects.add(new Laser(sprites, 200, 200, 300, 400));
 	}
@@ -84,7 +85,8 @@ public class Physics {
 	}
 	public void jump()
 	{
-		mPlayer.addVelocityY(jump);
+		if(mPlayer.getmPlayerState().compareTo(PlayerState.Running) == 0)
+			mPlayer.addVelocityY(jump);
 	}
 	public void animate(long elapsedTime) {
 		// TODO Auto-generated method stub

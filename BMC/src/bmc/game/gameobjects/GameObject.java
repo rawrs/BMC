@@ -12,9 +12,9 @@ abstract public class GameObject{
 	protected int mHeight;
 	protected Sprite[] mSprites;
 	protected float mVelocityX;
-	protected float maxVelocityX = 2,minVelocityX = -2;
+	protected float maxVelocityX = 200,minVelocityX = -200;
 	protected float mVelocityY;
-	protected float maxVelocityY = 2,minVelocityY = -20;
+	protected float maxVelocityY = 20,minVelocityY = -200;
 	protected int index = 0;
 	
 	public GameObject(Sprite[] sprites)
