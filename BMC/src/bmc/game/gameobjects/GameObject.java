@@ -7,14 +7,15 @@ import android.graphics.RectF;
 abstract public class GameObject{
     protected Rect mDestination = new Rect();
     protected RectF mRect = new RectF();
+    protected Rect mapPosition = new Rect();
 
 	protected int mWidth;
 	protected int mHeight;
 	protected Sprite[] mSprites;
 	protected float mVelocityX;
-	protected float maxVelocityX = 2,minVelocityX = -2;
+	protected float maxVelocityX = 200,minVelocityX = -200;
 	protected float mVelocityY;
-	protected float maxVelocityY = 2,minVelocityY = -20;
+	protected float maxVelocityY = 20,minVelocityY = -200;
 	protected int index = 0;
 	
 	public GameObject(Sprite[] sprites)
@@ -32,6 +33,10 @@ abstract public class GameObject{
 		mHeight = (current.getHeight());
 		mWidth = (current.getWidth());
 	}
+    public boolean shouldDraw(Rect rectangle)
+    {
+    	return Rect.intersects(mapPosition,rectangle);
+    }
 	public void animate(long elapsedTime)
 	{
 		this.addX(mVelocityX);
@@ -140,6 +145,10 @@ abstract public class GameObject{
 	}
 	public void setRect(RectF mRect) {
 		this.mRect = mRect;
+	}
+	public Rect getMapPostion() 
+	{
+		return mapPosition;
 	}
 	
 }

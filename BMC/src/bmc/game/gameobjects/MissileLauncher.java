@@ -1,29 +1,36 @@
 package bmc.game.gameobjects;
 
+import java.util.List;
+
+import bmc.game.SpriteLocations;
+
 import android.graphics.Canvas;
 
-public class MissileLauncher extends GameObject {
-	public MissileLauncher(Sprite[] sprites)
+public class MissileLauncher extends LaserGun {
+	public MissileLauncher(Sprite[] sprites, float x, float y, Player player, List<GameObject> gameObjects)
 	{
-		super(sprites);
-		// TODO Auto-generated constructor stub
+		super(sprites,x,y,player,gameObjects,SpriteLocations.Missile.getLocation());
 	}
 
-	@Override
-	public void animate(long elapsedTime) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void doDraw(Canvas canvas) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void move(int X, int Y) {
-		// TODO Auto-generated method stub
-		
+	public void animate(long elapsedTime)
+	{
+		lastShot += elapsedTime;
+		if(lastShot > 3000)
+		{
+			synchronized (gameObjects)
+			{
+				gameObjects.add(new Missile(sprites, getRect().centerX(), getRect().centerY(), player));
+				lastShot = 0;
+			}
+		}
+		float x = getX();
+		float y = getY();
+		float playerX = player.getRect().centerX();
+		float playerY = player.getRect().centerY();
+		double angle = Math.atan( (playerY-y) / (playerX-x) );
+		if( playerX - x < 0 )
+			angle += Math.PI;
+		rotation = (float)(angle * 180 / Math.PI) + 90f;
+		mSprites[index].animate(elapsedTime);
 	}
 }
