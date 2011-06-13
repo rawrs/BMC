@@ -468,6 +468,12 @@ public class LevelManager {
                                 newPath.setStartX(startX);
                                 newPath.setStartY(startY);
                                 
+                                // Add the objects
+                                for (GameObject obj : objects)
+                                {
+                                    newPath.AddObject(obj);
+                                }
+                                
                                 // Add the path
                                 paths.add(newPath);
                                 
