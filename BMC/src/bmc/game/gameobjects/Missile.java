@@ -22,6 +22,7 @@ public class Missile extends GameObject {
 		mVelocityX = (float)Math.cos(angle) * speed;
 		mVelocityY = (float)Math.sin(angle) * speed;
 		this.player = player;
+		killHuman = true;
 	}
 	
 	public void animate(long elapsedTime)

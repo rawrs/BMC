@@ -171,6 +171,7 @@ public class Panel extends SurfaceView implements SurfaceHolder.Callback{
 	public void onWindowFocusChanged(boolean hasWindowFocus) {
 		// TODO Auto-generated method stub
 		//add pause timer
+		gameState = GameState.start;
 		super.onWindowFocusChanged(hasWindowFocus);
 	}
 	public static void end()

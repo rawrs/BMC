@@ -118,6 +118,7 @@ public class Level {
 				initialized = true;
 			}
 		}
+		int i = 0;
 	}
 
 	public void doDraw(Canvas canvas) {
@@ -132,11 +133,13 @@ public class Level {
 		}
 	}
     
-    public CollisionStates IsCollidingWithLevel(RectF rect)
+    public CollisionStates IsCollidingWithLevel(RectF rect1)
     {
         // We have the bounding rectangle for the object in question. Now
         // we should check all of the blocks in our paths to see if they intersect in any direction.
         CollisionStates state = CollisionStates.NONE;
+        RectF rect = new RectF(rect1.left + mDestination.left,rect1.top + mDestination.top,rect1.right + mDestination.left,rect1.bottom + mDestination.top);
+
         boolean top = false, bottom = false, left = false, right = false;
         for (Path p : paths)
         {
@@ -144,8 +147,10 @@ public class Level {
             
             for (Block b : blocks)
             {
+            	
+            	
                 // Bounds for top and bottom
-                if ((rect.left >= b.getXpos() && rect.left <= b.getXpos()+b.getWidth()) || (rect.right <= b.getXpos() + b.getWidth())&& rect.right <= b.getXpos())
+                if ((rect.left >= b.getXpos() && rect.left <= b.getXpos()+b.getWidth()) || ((rect.right <= b.getXpos() + b.getWidth())&& (rect.right >= b.getXpos())))
                 {
                     // Top check
                     if (rect.top <= b.getYpos() + b.getHeight() && rect.top >= b.getYpos())

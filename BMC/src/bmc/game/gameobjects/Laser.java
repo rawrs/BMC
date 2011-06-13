@@ -18,6 +18,7 @@ public class Laser extends GameObject {
 		setY(y1 - mHeight/2f);
 		mVelocityX = (float)Math.cos(angle) * speed;
 		mVelocityY = (float)Math.sin(angle) * speed;
+		killHuman = true;
 	}
 
 	public void doDraw(Canvas canvas)

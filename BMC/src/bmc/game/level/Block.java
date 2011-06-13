@@ -40,10 +40,10 @@ public class Block extends GameObject{
     }
 
     public int getXpos() {
-        return mDestination.left;
+        return mapPosition.left;
     }
 
     public int getYpos() {
-        return mDestination.top;
+        return mapPosition.top;
     }
 }

@@ -17,6 +17,7 @@ abstract public class GameObject{
 	protected float mVelocityY;
 	protected float maxVelocityY = 20,minVelocityY = -200;
 	protected int index = 0;
+	protected boolean killHuman = false;
 	
 	public GameObject(Sprite[] sprites)
 	{
