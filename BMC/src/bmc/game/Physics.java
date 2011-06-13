@@ -46,6 +46,7 @@ public class Physics {
         //every level starts at 0,0
         mLevel.setX(0);
         mLevel.setY(0);
+        Panel.end();
 	}
 	public void logic()
 	{
