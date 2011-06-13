@@ -108,6 +108,7 @@ public class Level {
 			    }
 				initialized = true;
 			}
+			/*
 			synchronized (objectsOnScreen)
 			{
 			    objectsOnScreen.clear();
@@ -128,7 +129,7 @@ public class Level {
                         }
                     }
 			    }
-			}
+			}*/
 		}
 		int i = 0;
 	}
