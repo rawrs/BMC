@@ -66,4 +66,14 @@ public class LaserGun extends GameObject {
 	{
 		return;
 	}
+	
+	public void setPlayer(Player player)
+	{
+	    this.player = player;
+	}
+	
+	public void setList(List<GameObject> objects)
+    {
+        this.gameObjects = objects;
+    }
 }
