@@ -36,9 +36,6 @@ public class Physics {
         mPlayer.setY(mLevel.getStartY());
 		
 		gameObjects.add(new Laser(sprites, 200, 200, 300, 400));
-		
-		mLevel.setPlayerInObjects(mPlayer);
-        mLevel.setListInObjects(gameObjects);
 	}
 	public void logic()
 	{
@@ -132,10 +129,5 @@ public class Physics {
 	public void setmLevel(Level mLevel) 
 	{
 		this.mLevel = mLevel;
-	}
-	
-	public Player getPlayer()
-	{
-	    return mPlayer;
 	}
 }

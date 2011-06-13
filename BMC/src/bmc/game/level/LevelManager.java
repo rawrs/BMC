@@ -2,7 +2,6 @@ package bmc.game.level;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
@@ -13,8 +12,6 @@ import android.util.Log;
 import bmc.game.R;
 import bmc.game.SpriteLocations;
 import bmc.game.gameobjects.GameObject;
-import bmc.game.gameobjects.LaserGun;
-import bmc.game.gameobjects.Player;
 import bmc.game.gameobjects.Sprite;
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -97,6 +94,8 @@ public class LevelManager {
                     // 3. Rinse and repeat until we find the level end tag
                     while (event != XmlPullParser.END_TAG || !parser.getName().contentEquals("level"))
                     {
+                        
+                        
                         if (event == XmlPullParser.START_TAG)
                         {
                             // We should look for path, entrance, or object tags
@@ -330,23 +329,7 @@ public class LevelManager {
                                         }
                                         
                                         // Add the object
-                                        // TODO: Add the rest of the types
-                                        if (type.contentEquals("Platform"))
-                                        {
-                                            Block platform = new Block(width, height, xpos, ypos, sprites, 
-                                                    SpriteLocations.ground.getLocation());
-                                            
-                                            blocks.add(platform);
-                                        }
-                                        else if (type.contentEquals("LaserGun"))
-                                        {
-                                            // Create a temp player and list of game objects. These will be
-                                            // set later in physics
-                                            Player tempPlayer = new Player(sprites);
-                                            List<GameObject> tempObjects = new ArrayList<GameObject>();
-                                            LaserGun laser = new LaserGun(sprites, xpos, ypos, tempPlayer, tempObjects);
-                                            objects.add(laser);
-                                        }
+                                        // TODO: Add the object
                                     }
                                     else if (parser.getName().contentEquals("block"))
                                     {
