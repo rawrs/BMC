@@ -122,6 +122,10 @@ public class Physics {
 		//if(mPlayer.getmPlayerState().compareTo(PlayerState.Running)==0)
 			mLevel.animate(elapsedTime, gameSpeed, 0);
 		//mLevel.animate(elapsedTime, 0, 0);
+		if(mLevel.reachedEnd())
+		{
+			Panel.beatLevel();
+		}
 	    
 	}
 

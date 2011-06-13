@@ -24,10 +24,58 @@
                 <ypos>400</ypos>
             </block>
             <block>
-                <width>2000</width>
+                <width>500</width>
                 <height>300</height>
-                <xpos>6000</xpos>
+                <xpos>4700</xpos>
                 <ypos>400</ypos>
+            </block>
+            <block>
+                <width>500</width>
+                <height>300</height>
+                <xpos>5450</xpos>
+                <ypos>450</ypos>
+            </block>
+            <block>
+                <width>500</width>
+                <height>300</height>
+                <xpos>5950</xpos>
+                <ypos>400</ypos>
+            </block>
+            <block>
+                <width>500</width>
+                <height>400</height>
+                <xpos>6450</xpos>
+                <ypos>200</ypos>
+            </block>
+            <block>
+                <width>500</width>
+                <height>300</height>
+                <xpos>7250</xpos>
+                <ypos>400</ypos>
+            </block>
+            <block>
+                <width>500</width>
+                <height>300</height>
+                <xpos>7900</xpos>
+                <ypos>200</ypos>
+            </block>
+            <block>
+                <width>500</width>
+                <height>300</height>
+                <xpos>8400</xpos>
+                <ypos>100</ypos>
+            </block>
+            <block>
+                <width>500</width>
+                <height>300</height>
+                <xpos>9000</xpos>
+                <ypos>400</ypos>
+            </block>
+            <block>
+                <width>9000</width>
+                <height>300</height>
+                <xpos>9700</xpos>
+                <ypos>450</ypos>
             </block>
             <start>
                 <xpos>100</xpos>

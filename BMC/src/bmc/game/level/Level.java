@@ -133,7 +133,12 @@ public class Level {
 		}
 		int i = 0;
 	}
-
+	public Boolean reachedEnd()
+	{
+		if(mDestination.left >10100)
+			return true;
+		return false;
+	}
 	public void doDraw(Canvas canvas) {
 		// TODO Auto-generated method stub
 		

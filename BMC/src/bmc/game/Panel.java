@@ -20,7 +20,7 @@ import android.view.SurfaceView;
 public class Panel extends SurfaceView implements SurfaceHolder.Callback{
 	public enum GameState
 	{
-		start,running,end;
+		start,running,end,beatLevel;
 	}
 	private static ViewThread mThread;
 	public static float mWidth;
@@ -94,6 +94,9 @@ public class Panel extends SurfaceView implements SurfaceHolder.Callback{
 		case end:
 			canvas.drawText("You scored "+points+" points", mWidth /2-mWidth/4, mHeight/2, mPaint);
 			break;
+		case beatLevel:
+			canvas.drawText("Congratulation you beat level with the score "+points+" points ", mWidth /2-mWidth/4, mHeight/2, mPaint);
+			break;
 		case running:
 			canvas.drawColor(Color.BLACK);
 		    mPhysics.doDraw(canvas);
@@ -113,6 +116,9 @@ public class Panel extends SurfaceView implements SurfaceHolder.Callback{
 		case end:
 			switchFromEndToStart();
 			break;
+		case beatLevel:
+			gameState = gameState.start;
+			break;
 		case running:
 			if(!paused)
 			{
@@ -126,6 +132,7 @@ public class Panel extends SurfaceView implements SurfaceHolder.Callback{
 		switch(gameState)
 		{
 		case start:
+		case beatLevel:
 			break;
 		case end:
 			sinceEnd += elapsedTime;
@@ -178,6 +185,10 @@ public class Panel extends SurfaceView implements SurfaceHolder.Callback{
 	{
 		gameState = GameState.end;
 		sinceEnd = 0;
+	}
+	public static void beatLevel()
+	{
+		gameState = GameState.beatLevel;
 	}
 	private void switchFromEndToStart()
 	{
