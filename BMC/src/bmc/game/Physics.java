@@ -3,7 +3,6 @@ package bmc.game;
 import java.util.ArrayList;
 import java.util.List;
 
-import android.content.res.Resources;
 import android.graphics.Canvas;
 import bmc.game.gameobjects.GameObject;
 import bmc.game.gameobjects.Laser;

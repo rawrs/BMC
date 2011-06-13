@@ -6,7 +6,7 @@ import android.view.SurfaceHolder;
 public class ViewThread extends Thread{
 	private Panel mPanel;
     private SurfaceHolder mHolder;
-    private long mStartTime;
+    public static long mStartTime;
     private long mElapsed;
     private boolean mRun = false;
     
