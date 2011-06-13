@@ -103,7 +103,20 @@ public class Level {
 			        			blocksOnScreen.add(block);
 			        		}
 			        	}
-			        	for (GameObject obj : path.getObjects())
+			        	
+			        }
+			    }
+				initialized = true;
+			}
+			synchronized (objectsOnScreen)
+			{
+			    objectsOnScreen.clear();
+			    
+			    synchronized (paths) 
+			    {
+                    for (Path path : paths) 
+                    {
+        			    for (GameObject obj : path.getObjects())
                         {
                             if(obj.shouldDraw(mDestination))
                             {
@@ -113,9 +126,8 @@ public class Level {
                                 objectsOnScreen.add(obj);
                             }
                         }
-			        }
+                    }
 			    }
-				initialized = true;
 			}
 		}
 	}
