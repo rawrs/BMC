@@ -18,25 +18,38 @@ import android.view.SurfaceView;
 
 //panel class
 public class Panel extends SurfaceView implements SurfaceHolder.Callback{
-	
-	private ViewThread mThread;
+	public enum GameState
+	{
+		start,running,end;
+	}
+	private static ViewThread mThread;
 	public static float mWidth;
 	public static float mHeight;
-	private Paint mPaint = new Paint();
-	private Sprite[] mSprites = new Sprite[SpriteLocations.values().length];
-	private Physics mPhysics;
+	private static Paint mPaint = new Paint();
+	private static Sprite[] mSprites = new Sprite[SpriteLocations.values().length];
+	private static Physics mPhysics;
+	public static float points = 0;
+	private static Boolean paused = false;
+	private static GameState gameState = GameState.start;
+	private static float sinceEnd = 0;
 	 
 	public Panel(Context context) {
 	    super(context);
 	    getHolder().addCallback(this);
 	    mThread = new ViewThread(this);
 	    
-	    
-	    mPaint.setColor(Color.WHITE);
-	    getSprites();
-	    Resources res = getResources();
-	    LevelManager level = new LevelManager(getResources(),mSprites);
-	    mPhysics = new Physics(mSprites,level);
+	    if(mPhysics == null)
+	    {
+		    mPaint.setColor(Color.WHITE);
+		    getSprites();
+		    Resources res = getResources();
+		    LevelManager level = new LevelManager(getResources(),mSprites);
+		    mPhysics = new Physics(mSprites,level);
+	    }
+	    else
+	    {
+	    	ViewThread.mStartTime = System.currentTimeMillis();
+	    }
 	    
 	}
 	public void getSprites()
@@ -73,18 +86,58 @@ public class Panel extends SurfaceView implements SurfaceHolder.Callback{
 	public void doDraw(long elapsed,Canvas canvas) 
 	{
 		canvas.drawColor(Color.BLACK);
-	    mPhysics.doDraw(canvas);
-	    canvas.drawText("FPS: " + Math.round(1000f / elapsed), 10, 10, mPaint);
+		switch(gameState)
+		{
+		case start:
+			canvas.drawText("Click to start", mWidth /2-mWidth/4, mHeight/2, mPaint);
+			break;
+		case end:
+			canvas.drawText("You scored "+points+" points", mWidth /2-mWidth/4, mHeight/2, mPaint);
+			break;
+		case running:
+			canvas.drawColor(Color.BLACK);
+		    mPhysics.doDraw(canvas);
+		    points += elapsed*10;
+		    canvas.drawText("Points: " + Math.round(points), 10, 10, mPaint);
+		}
 	}
+	
 	@Override
 	public boolean onTouchEvent(MotionEvent event) 
 	{
-		mPhysics.jump();
+		switch(gameState)
+		{
+		case start:
+			gameState = gameState.running;
+			break;
+		case end:
+			switchFromEndToStart();
+			break;
+		case running:
+			if(!paused)
+			{
+				mPhysics.jump();
+			}
+		}
 	    return super.onTouchEvent(event);
 	}
 	public void animate(long elapsedTime) 
 	{
-	    mPhysics.animate(elapsedTime);
+		switch(gameState)
+		{
+		case start:
+			break;
+		case end:
+			sinceEnd += elapsedTime;
+			if(sinceEnd > 5000)
+				switchFromEndToStart();
+			break;
+		case running:
+			if(!paused)
+			{
+				mPhysics.animate(elapsedTime);
+			}
+		}
 	}
 	@Override
 	public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) 
@@ -114,4 +167,21 @@ public class Panel extends SurfaceView implements SurfaceHolder.Callback{
 	    }
 		
 	}
+	@Override
+	public void onWindowFocusChanged(boolean hasWindowFocus) {
+		// TODO Auto-generated method stub
+		//add pause timer
+		super.onWindowFocusChanged(hasWindowFocus);
+	}
+	public static void end()
+	{
+		gameState = GameState.end;
+		sinceEnd = 0;
+	}
+	private void switchFromEndToStart()
+	{
+		gameState = GameState.start;
+		points = 0;
+	}
+	
 }

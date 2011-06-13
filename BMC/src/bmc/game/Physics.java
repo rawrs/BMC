@@ -3,7 +3,6 @@ package bmc.game;
 import java.util.ArrayList;
 import java.util.List;
 
-import android.content.res.Resources;
 import android.graphics.Canvas;
 import bmc.game.gameobjects.GameObject;
 import bmc.game.gameobjects.Laser;
@@ -47,6 +46,7 @@ public class Physics {
         //every level starts at 0,0
         mLevel.setX(0);
         mLevel.setY(0);
+        Panel.end();
 	}
 	public void logic()
 	{
