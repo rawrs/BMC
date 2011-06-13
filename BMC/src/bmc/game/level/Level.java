@@ -1,9 +1,12 @@
 package bmc.game.level;
     
 import java.util.ArrayList;
+import java.util.List;
 
 import bmc.game.Panel;
 import bmc.game.gameobjects.GameObject;
+import bmc.game.gameobjects.LaserGun;
+import bmc.game.gameobjects.Player;
 import bmc.game.gameobjects.Sprite;
 
 import android.graphics.Canvas;
@@ -283,5 +286,49 @@ public class Level {
     public void setStartY(int startY)
     {
         this.startY = startY;
+    }
+    
+    public void setPlayerInObjects(Player player)
+    {
+        // This function is meant to set the player object in all
+        // of the objects we have stored in each path. A temp player
+        // was created in LevelManager to feed into the objects to
+        // create them, but this temp player obviously isn't the one
+        // we want. Physics calls this, as it holds on to the player 
+        // object. 
+        for (Path p : paths)
+        {
+            ArrayList<GameObject> objs = p.getObjects();
+            for (GameObject obj : objs)
+            {
+                if (obj.getClass().equals(LaserGun.class))
+                {
+                    LaserGun gun = (LaserGun) obj;
+                    gun.setPlayer(player);
+                }
+            }
+        }
+    }
+    
+    public void setListInObjects(List<GameObject> objects)
+    {
+        // This function is meant to set the object list in all
+        // of the objects we have stored in each path. A temp list
+        // was created in LevelManager to feed into the objects to
+        // create them, but this temp list obviously isn't the one
+        // we want. Physics calls this, as it holds on to the object 
+        // list. 
+        for (Path p : paths)
+        {
+            ArrayList<GameObject> objs = p.getObjects();
+            for (GameObject obj : objs)
+            {
+                if (obj.getClass().equals(LaserGun.class))
+                {
+                    LaserGun gun = (LaserGun) obj;
+                    gun.setList(objects);
+                }
+            }
+        }
     }
 }

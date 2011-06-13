@@ -36,6 +36,9 @@ public class Physics {
         mPlayer.setY(mLevel.getStartY());
 		
 		gameObjects.add(new Laser(sprites, 200, 200, 300, 400));
+		
+		mLevel.setPlayerInObjects(mPlayer);
+        mLevel.setListInObjects(gameObjects);
 	}
 	public void reset()
 	{
