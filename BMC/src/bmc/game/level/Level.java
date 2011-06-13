@@ -17,6 +17,7 @@ public class Level {
 	protected ArrayList<Path>         paths;
     protected ArrayList<Entrance>     entrances;
     protected ArrayList<Block>		  blocksOnScreen;
+    protected ArrayList<GameObject>   objectsOnScreen;
     protected Sprite[] 				  mSprites;
     protected RectF 				  mRect = new RectF();
     protected Rect					  mDestination = new Rect();
@@ -102,6 +103,16 @@ public class Level {
 			        			blocksOnScreen.add(block);
 			        		}
 			        	}
+			        	for (GameObject obj : path.getObjects())
+                        {
+                            if(obj.shouldDraw(mDestination))
+                            {
+                                obj.animate(elapsedTime);
+                                obj.setX(obj.getMapPostion().left-mDestination.left);
+                                obj.setY(obj.getMapPostion().top-mDestination.top);
+                                objectsOnScreen.add(obj);
+                            }
+                        }
 			        }
 			    }
 				initialized = true;
