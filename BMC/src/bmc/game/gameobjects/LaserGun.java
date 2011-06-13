@@ -4,6 +4,7 @@ import java.util.List;
 
 import bmc.game.SpriteLocations;
 import android.graphics.Canvas;
+import android.graphics.Rect;
 
 public class LaserGun extends GameObject {
 	protected float rotation;
@@ -14,20 +15,15 @@ public class LaserGun extends GameObject {
 	
 	public LaserGun(Sprite[] sprites, float x, float y, Player player, List<GameObject> gameObjects, int spriteLocation)
 	{
-		super(sprites, spriteLocation);
-		mVelocityX = 0;
-		mVelocityY = 0;
-		float playerX = player.getRect().centerX();
-		float playerY = player.getRect().centerY();
-		double angle = Math.atan( (playerY-y) / (playerX-x) );
-		if( playerX - x < 0 )
-			angle += Math.PI;
-		rotation = (float)(angle * 180 / Math.PI);
-		setX(x - mWidth/2f);
-		setY(y - mHeight/2f);
-		this.player = player;
-		this.gameObjects = gameObjects;
-		this.sprites = sprites;
+	    super(sprites, spriteLocation);
+        mVelocityX = 0;
+        mVelocityY = 0;
+        
+        this.player = player;
+        this.gameObjects = gameObjects;
+        this.sprites = sprites;
+        // TODO: Might need proper width/height later
+        mapPosition = new Rect((int) x, (int) y, (int) x + 1, (int) y + 1); 
 	}
 	
 	public LaserGun(Sprite[] sprites, float x, float y, Player player, List<GameObject> gameObjects)
