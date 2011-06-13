@@ -125,6 +125,7 @@ public class Physics {
 		if(mLevel.reachedEnd())
 		{
 			Panel.beatLevel();
+			reset();
 		}
 	    
 	}
