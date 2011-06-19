@@ -27,6 +27,9 @@ public class Level {
     protected Path                    pathWithStartPoint;
     protected int                     startX = 0;
     protected int                     startY = 0;
+    protected Path                    pathWithEndPoint;
+    protected int                     endX = 0;
+    protected int                     endY = 0;
     
     public enum CollisionStates
     {
@@ -67,10 +70,30 @@ public class Level {
         }
     }
     
+    public void UpdateEndPoint()
+    {
+        // Search through the paths to find the start point.
+        // This will be called every time a path is added.
+        // If no start point exists, the start point will remain (0, 0).
+        // This code also assumes one start point, as it will check
+        // each path. The last path in the array to have a start point
+        // will give its start point data.
+        for (Path p : paths)
+        {
+            if (p.isHasEndPoint())
+            {
+                pathWithEndPoint = p;
+                endX = p.getEndX();
+                endY = p.getEndY();
+            }
+        }
+    }
+    
     public void AddPath (Path path)
     {
         paths.add(path);
         UpdateStartPoint();
+        UpdateEndPoint();
     }
     
     public void AddEntrance (Entrance entrance)
@@ -135,9 +158,7 @@ public class Level {
 	}
 	public Boolean reachedEnd()
 	{
-		if(mDestination.left >10100)
-			return true;
-		return false;
+		return (mDestination.left > endX);
 	}
 	public void doDraw(Canvas canvas) {
 		// TODO Auto-generated method stub

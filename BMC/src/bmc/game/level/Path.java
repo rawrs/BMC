@@ -12,6 +12,8 @@ public class Path {
     private ArrayList<GameObject>   objects;
     private boolean                 hasStartPoint;
     private int                     startX, startY;
+    private boolean                 hasEndPoint;
+    private int                     endX, endY;
     
     public Path(String name,
                  int distance,
@@ -94,5 +96,35 @@ public class Path {
     public void setStartY(int startY)
     {
         this.startY = startY;
+    }
+
+    public boolean isHasEndPoint()
+    {
+        return hasEndPoint;
+    }
+
+    public void setHasEndPoint(boolean hasEndPoint)
+    {
+        this.hasEndPoint = hasEndPoint;
+    }
+
+    public int getEndX()
+    {
+        return endX;
+    }
+
+    public void setEndX(int endX)
+    {
+        this.endX = endX;
+    }
+
+    public int getEndY()
+    {
+        return endY;
+    }
+
+    public void setEndY(int endY)
+    {
+        this.endY = endY;
     }
 }

@@ -81,6 +81,10 @@
                 <xpos>100</xpos>
                 <ypos>300</ypos>
             </start>
+            <end>
+                <xpos>12000</xpos>
+                <ypos>500</ypos>
+            </end>
         </path>
     </level>
 </game>

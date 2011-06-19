@@ -97,8 +97,6 @@ public class LevelManager {
                     // 3. Rinse and repeat until we find the level end tag
                     while (event != XmlPullParser.END_TAG || !parser.getName().contentEquals("level"))
                     {
-                        
-                        
                         if (event == XmlPullParser.START_TAG)
                         {
                             // We should look for path, entrance, or object tags
@@ -116,6 +114,8 @@ public class LevelManager {
                                 ArrayList<GameObject> objects = new ArrayList<GameObject>();
                                 boolean hasStartPoint = false;
                                 int startX = 0, startY = 0;
+                                boolean hasEndPoint = false;
+                                int endX = 0, endY = 0;
                                 
                                 // Look for items in the path tag until we find the end tag for it.
                                 while (event != XmlPullParser.END_TAG || !parser.getName().contentEquals("path"))
@@ -161,6 +161,55 @@ public class LevelManager {
                                                 {
                                                     Log.e("LevelManager.LoadLevels", "Error: malformed ypos tag for " +
                                                             "start point. Exiting!");
+                                                    return -1;
+                                                }
+                                            }
+                                            
+                                            parser.next();
+                                            event = parser.getEventType();
+                                        }
+                                    }
+                                    else if (parser.getName().contentEquals("end"))
+                                    {
+                                        parser.next();
+                                        event = parser.getEventType();
+                                        
+                                        hasEndPoint = true;
+                                        
+                                        // Now we have to look for the x and y position
+                                        while (event != XmlPullParser.END_TAG || !parser.getName().contentEquals("end"))
+                                        {
+                                            if (parser.getName().contentEquals("xpos"))
+                                            {
+                                                parser.next();
+                                                event = parser.getEventType();
+                                                
+                                                endX = Integer.parseInt(parser.getText());
+                                                
+                                                parser.next();
+                                                event = parser.getEventType();
+                                                
+                                                if (!parser.getName().contentEquals("xpos") || event != XmlPullParser.END_TAG)
+                                                {
+                                                    Log.e("LevelManager.LoadLevels", "Error: malformed xpos tag for " +
+                                                            "end point. Exiting!");
+                                                    return -1;
+                                                }
+                                            }
+                                            else if (parser.getName().contentEquals("ypos"))
+                                            {
+                                                parser.next();
+                                                event = parser.getEventType();
+                                                
+                                                endY = Integer.parseInt(parser.getText());
+                                                
+                                                parser.next();
+                                                event = parser.getEventType();
+                                                
+                                                if (!parser.getName().contentEquals("ypos") || event != XmlPullParser.END_TAG)
+                                                {
+                                                    Log.e("LevelManager.LoadLevels", "Error: malformed ypos tag for " +
+                                                            "end point. Exiting!");
                                                     return -1;
                                                 }
                                             }
@@ -467,6 +516,11 @@ public class LevelManager {
                                 newPath.setHasStartPoint(hasStartPoint);
                                 newPath.setStartX(startX);
                                 newPath.setStartY(startY);
+                                
+                                // Set end stuff
+                                newPath.setHasEndPoint(hasEndPoint);
+                                newPath.setEndX(endX);
+                                newPath.setEndY(endY);
                                 
                                 // Add the objects
                                 for (GameObject obj : objects)
